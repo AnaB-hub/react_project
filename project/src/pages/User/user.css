@@ -1,0 +1,24 @@
+.input {
+  margin-right: 10px;
+}
+
+.buttonGroup {
+  width: 500px;
+  height: 45px;
+  margin-top: 20px;
+}
+
+.button {
+  margin-right: 20px;
+}
+
+.alinhar {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.titulo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
