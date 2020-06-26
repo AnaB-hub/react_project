@@ -25,6 +25,13 @@ function Menu() {
             </Link>
           </Nav.Link>
         </Nav>
+        <Nav>
+          <Nav.Link>
+            <Link className="menu" to="/login">
+              Login
+            </Link>
+          </Nav.Link>
+        </Nav>
       </Navbar.Collapse>
     </Navbar>
   );
