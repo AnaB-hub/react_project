@@ -14,7 +14,7 @@ function Menu() {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Navbar.Brand href="#home">
-        <Link className="menu title" to="/cadastro-usuario">
+        <Link className="menu title" to="/">
           Project
         </Link>
       </Navbar.Brand>
