@@ -33,14 +33,19 @@ function CadastroUser() {
       setSucess(true);
       return;
     }
+    //TODO Verificar pq não acusa a msg de erro
     setMessage("Erro ao cadastrar!");
+  }
+
+  function limpar() {
+    setNome("");
+    setCPF("");
+    setSenha("");
+    setEmail("");
   }
 
   return (
     <div className="body">
-      <div className="titulo">
-        <h1>Cadastro de Usuário</h1>
-      </div>
       {show && (
         <Alert
           variant={sucess ? "success" : "danger"}
@@ -50,38 +55,44 @@ function CadastroUser() {
           <Alert.Heading>{mensage}</Alert.Heading>
         </Alert>
       )}
+      <div className="titulo">
+        <h1>Cadastro de Usuário</h1>
+      </div>
       <Form onSubmit={handleRegister}>
         <div className="row">
           <div className="col-lg-3">
             <Form.Group className="input">
-              <Form.Label>Nome</Form.Label>
+              <Form.Label>Nome *</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Nome"
                 value={nome}
                 onChange={(e) => setNome(e.target.value)}
+                required
               />
             </Form.Group>
           </div>
           <div className="col-lg-3">
             <Form.Group className="input">
-              <Form.Label>CPF</Form.Label>
+              <Form.Label>CPF *</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="CPF"
+                placeholder="000.000.000-00"
                 value={cpf}
                 onChange={(e) => setCPF(e.target.value)}
+                required
               />
             </Form.Group>
           </div>
           <div className="col-lg-3">
             <Form.Group className="input">
-              <Form.Label>Senha</Form.Label>
+              <Form.Label>Senha *</Form.Label>
               <Form.Control
                 type="password"
                 placeholder="Senha"
                 value={senha}
                 onChange={(e) => setSenha(e.target.value)}
+                required
               />
             </Form.Group>
           </div>
@@ -105,12 +116,10 @@ function CadastroUser() {
             <Button
               variant="secondary"
               className="button"
-              onClick={() => setShow(true)}
+              type="button"
+              onClick={limpar}
             >
               Limpar
-            </Button>
-            <Button variant="secondary" className="button">
-              Voltar
             </Button>
           </ButtonGroup>
         </div>
