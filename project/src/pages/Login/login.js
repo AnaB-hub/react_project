@@ -33,6 +33,11 @@ function Login() {
     }
   }
 
+  function limpar() {
+    setSenha("");
+    setCPF("");
+  }
+
   return (
     <div>
       {show && (
@@ -78,7 +83,12 @@ function Login() {
                   <Button variant="dark" className="button" type="submit">
                     Entrar
                   </Button>
-                  <Button variant="secondary" className="button" type="button">
+                  <Button
+                    variant="secondary"
+                    className="button"
+                    type="button"
+                    onClick={limpar}
+                  >
                     Limpar
                   </Button>
                 </ButtonGroup>
