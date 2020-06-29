@@ -3,16 +3,17 @@ import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import { useDispatch } from "react-redux";
 
 import "./login.css";
-import { Form, Alert, Button, ButtonGroup } from "react-bootstrap";
+import { Form, Button, ButtonGroup } from "react-bootstrap";
 import api from "./../../services/api";
 import { addUser } from "./../../store/modules/user/actions";
+import Alerta from "./../../components/Alert/Alert";
 
 function Login({ history }) {
   const [cpf, setCPF] = useState("");
   const [senha, setSenha] = useState("");
   const [show, setShow] = useState(false);
-  const [sucess, setSucess] = useState(false);
   const [mensage, setMessage] = useState("");
+  const [variant, setVariant] = useState("");
 
   const dispatch = useDispatch();
 
@@ -29,7 +30,7 @@ function Login({ history }) {
       history.push("/");
     } else {
       setShow(true);
-      setSucess(false);
+      setVariant("danger");
       setMessage("CPF ou Senha inválidos! Tente novamente!");
     }
   }
@@ -41,15 +42,7 @@ function Login({ history }) {
 
   return (
     <div>
-      {show && (
-        <Alert
-          variant={sucess ? "success" : "danger"}
-          onClose={() => setShow(false)}
-          dismissible
-        >
-          <Alert.Heading>{mensage}</Alert.Heading>
-        </Alert>
-      )}
+      <Alerta variant={variant} show={show} mensage={mensage} />
       <MDBContainer className="body">
         <MDBRow>
           <MDBCol md="6">

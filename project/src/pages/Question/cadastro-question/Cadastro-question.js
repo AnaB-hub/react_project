@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Alert, Form, ButtonGroup, Button } from "react-bootstrap";
+
+import { Form, ButtonGroup, Button } from "react-bootstrap";
 
 import api from "./../../../services/api";
+import Alerta from "./../../../components/Alert/Alert";
 
 function CadastroQuestion() {
   const [question, setQuestion] = useState("");
@@ -9,7 +11,7 @@ function CadastroQuestion() {
   const [categoria, setCategoria] = useState("");
   const [categorias, setCategorias] = useState([]);
   const [show, setShow] = useState(false);
-  const [sucess, setSucess] = useState(false);
+  const [variant, setVariant] = useState("");
   const [mensage, setMessage] = useState("");
 
   useEffect(() => {
@@ -27,18 +29,14 @@ function CadastroQuestion() {
       titulo,
       categoria,
     };
-    setSucess(false);
     const response = await api.post("/question", data);
     if (response.status === 200 || response.status === 201) {
-      setMessage("Cadastrado com sucesso!");
+      setMessage("Cadastrada com sucesso!");
       setShow(true);
-      setSucess(true);
+      setVariant("success");
       limpar();
       return;
     }
-    //TODO Verificar pq não acusa a msg de erro
-    setShow(true);
-    setMessage("Erro ao cadastrar!");
   }
 
   function limpar() {
@@ -48,15 +46,7 @@ function CadastroQuestion() {
 
   return (
     <div className="body">
-      {show && (
-        <Alert
-          variant={sucess ? "success" : "danger"}
-          onClose={() => setShow(false)}
-          dismissible
-        >
-          <Alert.Heading>{mensage}</Alert.Heading>
-        </Alert>
-      )}
+      <Alerta variant={variant} show={show} mensage={mensage} />
       <div className="titulo">
         <h1>Cadastro de Perguntas</h1>
       </div>
