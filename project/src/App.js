@@ -5,14 +5,18 @@ import "./App.css";
 import Menu from "./components/Menu/menu";
 import Routes from "./routes";
 import history from "./services/history";
+import { Provider } from "react-redux";
+import store from "./store/store";
 
 function App() {
   return (
     <div>
-      <Router history={history}>
-        <Menu />
-        <Routes />
-      </Router>
+      <Provider store={store}>
+        <Router history={history}>
+          <Menu />
+          <Routes />
+        </Router>
+      </Provider>
     </div>
   );
 }
