@@ -47,7 +47,7 @@ function Login({ history }) {
         <MDBRow>
           <MDBCol md="6">
             <Form onSubmit={handleLogIn}>
-              <div className="titulo">
+              <div className="title">
                 <h1>Login</h1>
               </div>
               <div className="grey-text">

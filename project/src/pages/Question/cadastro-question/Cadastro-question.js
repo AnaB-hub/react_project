@@ -47,7 +47,7 @@ function CadastroQuestion() {
   return (
     <div className="body">
       <Alerta variant={variant} show={show} mensage={mensage} />
-      <div className="titulo">
+      <div className="title">
         <h1>Cadastro de Perguntas</h1>
       </div>
       <Form onSubmit={handleRegister}>

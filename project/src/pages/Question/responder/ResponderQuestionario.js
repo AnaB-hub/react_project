@@ -19,7 +19,7 @@ function ResponderQuestionario() {
 
   return (
     <div className="body">
-      <div className="titulo">
+      <div className="title">
         <h1>Questionário</h1>
       </div>
       {questions.map((question) => (

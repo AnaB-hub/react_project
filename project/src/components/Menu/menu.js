@@ -2,23 +2,19 @@ import React from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./menu.css";
+import { BsFillBriefcaseFill } from "react-icons/bs";
 
 function Menu() {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Navbar.Brand href="#home">
-        <Link className="menu title" to="/">
-          Project
+        <Link className="menu" to="/">
+          Project <BsFillBriefcaseFill />
         </Link>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link>
-            <Link className="menu" to="/">
-              Página Inicial
-            </Link>
-          </Nav.Link>
           <Nav.Link>
             <Link className="menu" to="/cadastro-usuario">
               Cadastro de Usuário
