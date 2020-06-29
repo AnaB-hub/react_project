@@ -4,6 +4,7 @@ import { Form, ButtonGroup, Button } from "react-bootstrap";
 
 import api from "./../../../services/api";
 import Alerta from "./../../../components/Alert/Alert";
+import Loader from "./../../../components/Loader/Loader";
 
 function CadastroQuestion() {
   const [question, setQuestion] = useState("");
@@ -13,11 +14,14 @@ function CadastroQuestion() {
   const [show, setShow] = useState(false);
   const [variant, setVariant] = useState("");
   const [mensage, setMessage] = useState("");
+  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
     async function getCategorias() {
+      setLoader(true);
       let categorias = await api.get("/categorias");
       setCategorias(categorias.data);
+      setLoader(false);
     }
     getCategorias();
   }, []);
@@ -50,18 +54,19 @@ function CadastroQuestion() {
       <div className="title">
         <h1>Cadastro de Perguntas</h1>
       </div>
+      <Loader loader={loader} />
       <Form onSubmit={handleRegister}>
         <div className="row">
           <div className="col-lg-5">
             <Form.Group controlId="exampleForm.ControlSelect1">
-              <Form.Label>Categoria</Form.Label>
+              <Form.Label>Categoria *</Form.Label>
               <Form.Control
                 as="select"
                 value={categoria}
                 onChange={(e) => setCategoria(e.target.value)}
                 required
               >
-                <option>Selecione</option>
+                <option value="null">Selecione</option>
                 {categorias.map((categoria) => (
                   <option value={categoria.id}>{categoria.nome}</option>
                 ))}
@@ -70,7 +75,7 @@ function CadastroQuestion() {
           </div>
           <div className="col-lg-5">
             <Form.Group>
-              <Form.Label>Título</Form.Label>
+              <Form.Label>Título *</Form.Label>
               <Form.Control
                 rows="1"
                 placeholder="Título"
@@ -84,7 +89,7 @@ function CadastroQuestion() {
         <div className="row">
           <div className="col-lg-10">
             <Form.Group>
-              <Form.Label>Pergunta</Form.Label>
+              <Form.Label>Pergunta *</Form.Label>
               <Form.Control
                 as="textarea"
                 rows="4"

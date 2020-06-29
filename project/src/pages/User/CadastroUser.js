@@ -59,7 +59,7 @@ function CadastroUser() {
       </div>
       <Form onSubmit={handleRegister}>
         <div className="row">
-          <div className="col-lg-3">
+          <div className="col-lg-4">
             <Form.Group className="input">
               <Form.Label>Nome *</Form.Label>
               <Form.Control
@@ -95,7 +95,9 @@ function CadastroUser() {
               />
             </Form.Group>
           </div>
-          <div className="col-lg-3">
+        </div>
+        <div className="row">
+          <div className="col-lg-10">
             <Form.Group className="input">
               <Form.Label>E-mail</Form.Label>
               <Form.Control
