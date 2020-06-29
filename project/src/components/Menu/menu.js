@@ -24,6 +24,11 @@ function Menu() {
               Cadastro de Usuário
             </Link>
           </Nav.Link>
+          <Nav.Link>
+            <Link className="menu" to="/cadastro-question">
+              Cadastro de Perguntas
+            </Link>
+          </Nav.Link>
         </Nav>
         <Nav>
           <Nav.Link>

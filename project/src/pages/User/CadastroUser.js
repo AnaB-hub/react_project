@@ -13,8 +13,6 @@ function CadastroUser() {
   const [sucess, setSucess] = useState(false);
   const [mensage, setMessage] = useState("");
 
-  // const history = useHistory();
-
   useEffect(() => {}, []);
 
   async function handleRegister(e) {
