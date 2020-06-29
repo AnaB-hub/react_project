@@ -29,7 +29,7 @@ function ResponderQuestionario() {
       <Loader loader={loader} />
       {questions.map((question) => (
         <>
-          <Card>
+          <Card className="card">
             <Card.Body>
               <Card.Title>
                 {question.id}- {question.titulo}
