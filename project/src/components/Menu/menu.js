@@ -29,6 +29,11 @@ function Menu() {
               Cadastro de Perguntas
             </Link>
           </Nav.Link>
+          <Nav.Link>
+            <Link className="menu" to="/responder-questionario">
+              Questionário
+            </Link>
+          </Nav.Link>
         </Nav>
         <Nav>
           <Nav.Link>

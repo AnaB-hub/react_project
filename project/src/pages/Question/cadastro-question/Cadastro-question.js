@@ -5,6 +5,7 @@ import api from "./../../../services/api";
 
 function CadastroQuestion() {
   const [question, setQuestion] = useState("");
+  const [titulo, setTitulo] = useState("");
   const [categoria, setCategoria] = useState("");
   const [categorias, setCategorias] = useState([]);
   const [show, setShow] = useState(false);
@@ -23,6 +24,7 @@ function CadastroQuestion() {
     e.preventDefault();
     const data = {
       question,
+      titulo,
       categoria,
     };
     setSucess(false);
@@ -60,7 +62,7 @@ function CadastroQuestion() {
       </div>
       <Form onSubmit={handleRegister}>
         <div className="row">
-          <div className="col-lg-4">
+          <div className="col-lg-5">
             <Form.Group controlId="exampleForm.ControlSelect1">
               <Form.Label>Categoria</Form.Label>
               <Form.Control
@@ -76,12 +78,26 @@ function CadastroQuestion() {
               </Form.Control>
             </Form.Group>
           </div>
-          <div className="col-lg-8">
+          <div className="col-lg-5">
+            <Form.Group>
+              <Form.Label>Título</Form.Label>
+              <Form.Control
+                rows="1"
+                placeholder="Título"
+                value={titulo}
+                onChange={(e) => setTitulo(e.target.value)}
+                required
+              />
+            </Form.Group>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-lg-10">
             <Form.Group>
               <Form.Label>Pergunta</Form.Label>
               <Form.Control
                 as="textarea"
-                rows="1"
+                rows="4"
                 placeholder="Informe a pergunta que deseja salvar"
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
