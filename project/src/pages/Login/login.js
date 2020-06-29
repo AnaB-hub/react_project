@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
+import { useDispatch } from "react-redux";
 
 import "./login.css";
 import { Form, Alert, Button, ButtonGroup } from "react-bootstrap";
 import api from "./../../services/api";
+import { addUser } from "./../../store/modules/user/actions";
 
-function Login() {
+function Login({ history }) {
   const [cpf, setCPF] = useState("");
   const [senha, setSenha] = useState("");
   const [show, setShow] = useState(false);
   const [sucess, setSucess] = useState(false);
   const [mensage, setMessage] = useState("");
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     //Limpar o nome do User qdo entrar em login
@@ -19,13 +23,10 @@ function Login() {
 
   async function handleLogIn(e) {
     e.preventDefault();
-    const data = {
-      cpf,
-      senha,
-    };
     const response = await api.get(`/user?cpf=${cpf}&senha=${senha}`);
     if (response && response.data.length) {
-      localStorage.setItem("user", response.data[0].nome);
+      dispatch(addUser(response.data[0].nome));
+      history.push("/");
     } else {
       setShow(true);
       setSucess(false);
