@@ -4,27 +4,32 @@ import { Card, Button, ButtonGroup } from "react-bootstrap";
 
 import "./responderQuestionario.css";
 import api from "./../../../services/api";
+import Loader from "./../../../components/Loader/Loader";
 
 function ResponderQuestionario() {
   const [questions, setQuestions] = useState([]);
+  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
     async function getQuestions() {
+      setLoader(true);
       let questions = await api.get("/question");
       console.log(questions.data);
       setQuestions(questions.data);
+      setLoader(false);
     }
     getQuestions();
   }, []);
 
   return (
     <div className="body">
-      <div className="titulo">
+      <div className="title">
         <h1>Questionário</h1>
       </div>
+      <Loader loader={loader} />
       {questions.map((question) => (
         <>
-          <Card>
+          <Card className="card">
             <Card.Body>
               <Card.Title>
                 {question.id}- {question.titulo}

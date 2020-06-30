@@ -7,6 +7,7 @@ import Routes from "./routes";
 import history from "./services/history";
 import { Provider } from "react-redux";
 import store from "./store/store";
+import Rodape from "./components/rodape/rodape";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Router history={history}>
           <Menu />
           <Routes />
+          <Rodape />
         </Router>
       </Provider>
     </div>

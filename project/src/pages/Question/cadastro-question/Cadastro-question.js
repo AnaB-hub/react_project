@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Alert, Form, ButtonGroup, Button } from "react-bootstrap";
+
+import { Form, ButtonGroup, Button } from "react-bootstrap";
 
 import api from "./../../../services/api";
+import Alerta from "./../../../components/Alert/Alert";
+import Loader from "./../../../components/Loader/Loader";
 
 function CadastroQuestion() {
   const [question, setQuestion] = useState("");
@@ -9,13 +12,16 @@ function CadastroQuestion() {
   const [categoria, setCategoria] = useState("");
   const [categorias, setCategorias] = useState([]);
   const [show, setShow] = useState(false);
-  const [sucess, setSucess] = useState(false);
+  const [variant, setVariant] = useState("");
   const [mensage, setMessage] = useState("");
+  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
     async function getCategorias() {
+      setLoader(true);
       let categorias = await api.get("/categorias");
       setCategorias(categorias.data);
+      setLoader(false);
     }
     getCategorias();
   }, []);
@@ -27,18 +33,14 @@ function CadastroQuestion() {
       titulo,
       categoria,
     };
-    setSucess(false);
     const response = await api.post("/question", data);
     if (response.status === 200 || response.status === 201) {
-      setMessage("Cadastrado com sucesso!");
+      setMessage("Cadastrada com sucesso!");
       setShow(true);
-      setSucess(true);
+      setVariant("success");
       limpar();
       return;
     }
-    //TODO Verificar pq não acusa a msg de erro
-    setShow(true);
-    setMessage("Erro ao cadastrar!");
   }
 
   function limpar() {
@@ -48,30 +50,23 @@ function CadastroQuestion() {
 
   return (
     <div className="body">
-      {show && (
-        <Alert
-          variant={sucess ? "success" : "danger"}
-          onClose={() => setShow(false)}
-          dismissible
-        >
-          <Alert.Heading>{mensage}</Alert.Heading>
-        </Alert>
-      )}
-      <div className="titulo">
+      <Alerta variant={variant} show={show} mensage={mensage} />
+      <div className="title">
         <h1>Cadastro de Perguntas</h1>
       </div>
+      <Loader loader={loader} />
       <Form onSubmit={handleRegister}>
         <div className="row">
           <div className="col-lg-5">
             <Form.Group controlId="exampleForm.ControlSelect1">
-              <Form.Label>Categoria</Form.Label>
+              <Form.Label>Categoria *</Form.Label>
               <Form.Control
                 as="select"
                 value={categoria}
                 onChange={(e) => setCategoria(e.target.value)}
                 required
               >
-                <option>Selecione</option>
+                <option value="null">Selecione</option>
                 {categorias.map((categoria) => (
                   <option value={categoria.id}>{categoria.nome}</option>
                 ))}
@@ -80,7 +75,7 @@ function CadastroQuestion() {
           </div>
           <div className="col-lg-5">
             <Form.Group>
-              <Form.Label>Título</Form.Label>
+              <Form.Label>Título *</Form.Label>
               <Form.Control
                 rows="1"
                 placeholder="Título"
@@ -94,7 +89,7 @@ function CadastroQuestion() {
         <div className="row">
           <div className="col-lg-10">
             <Form.Group>
-              <Form.Label>Pergunta</Form.Label>
+              <Form.Label>Pergunta *</Form.Label>
               <Form.Control
                 as="textarea"
                 rows="4"

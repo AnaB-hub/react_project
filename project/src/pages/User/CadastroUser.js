@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-import { Form, Button, ButtonGroup, Alert } from "react-bootstrap";
+import { Form, Button, ButtonGroup } from "react-bootstrap";
+
 import "./user.css";
 import api from "./../../services/api";
+import Alerta from "./../../components/Alert/Alert";
 
 function CadastroUser() {
   const [nome, setNome] = useState("");
@@ -10,8 +12,8 @@ function CadastroUser() {
   const [senha, setSenha] = useState("");
   const [email, setEmail] = useState("");
   const [show, setShow] = useState(false);
-  const [sucess, setSucess] = useState(false);
   const [mensage, setMessage] = useState("");
+  const [variant, setVariant] = useState("");
 
   useEffect(() => {}, []);
 
@@ -23,16 +25,23 @@ function CadastroUser() {
       senha,
       email,
     };
-    setSucess(false);
-    const response = await api.post("/user", data);
-    if (response.status === 200 || response.status === 201) {
-      setMessage("Cadastrado com sucesso!");
+    let response;
+    try {
+      response = await api.post("/user", data);
+    } catch (e) {
+      setMessage("Erro ao cadastrar. Tente novamente mais tarde!");
       setShow(true);
-      setSucess(true);
+      setVariant("danger");
+      console.log("ERROS", e);
       return;
     }
-    //TODO Verificar pq não acusa a msg de erro
-    setMessage("Erro ao cadastrar!");
+    if ((response && response.status === 200) || response.status === 201) {
+      setMessage("Cadastrado com sucesso!");
+      setShow(true);
+      setVariant("success");
+      limpar();
+      return;
+    }
   }
 
   function limpar() {
@@ -44,21 +53,13 @@ function CadastroUser() {
 
   return (
     <div className="body">
-      {show && (
-        <Alert
-          variant={sucess ? "success" : "danger"}
-          onClose={() => setShow(false)}
-          dismissible
-        >
-          <Alert.Heading>{mensage}</Alert.Heading>
-        </Alert>
-      )}
-      <div className="titulo">
+      <Alerta variant={variant} show={show} mensage={mensage} />
+      <div className="title">
         <h1>Cadastro de Usuário</h1>
       </div>
       <Form onSubmit={handleRegister}>
         <div className="row">
-          <div className="col-lg-3">
+          <div className="col-lg-4">
             <Form.Group className="input">
               <Form.Label>Nome *</Form.Label>
               <Form.Control
@@ -94,7 +95,9 @@ function CadastroUser() {
               />
             </Form.Group>
           </div>
-          <div className="col-lg-3">
+        </div>
+        <div className="row">
+          <div className="col-lg-10">
             <Form.Group className="input">
               <Form.Label>E-mail</Form.Label>
               <Form.Control
