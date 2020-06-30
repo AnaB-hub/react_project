@@ -7,13 +7,11 @@ import { useSelector } from "react-redux";
 
 function Menu() {
   const user = useSelector((state) => state.user);
-  const [hasUser, setHasUser] = useState(false);
+  const [hasUser, setHasUser] = useState("");
 
   useEffect(() => {
-    if (user && user.length > 0) {
-      setHasUser(true);
-    } else {
-      setHasUser(false);
+    if (user && user.length) {
+      setHasUser(user[user.length - 1]);
     }
   }, [user]);
 
@@ -46,7 +44,7 @@ function Menu() {
         <Nav>
           <Nav.Link>
             <Link className="menu" to="/login">
-              {hasUser ? user + " - Sair" : "Login"}
+              {hasUser ? hasUser + " - Sair" : "Login"}
             </Link>
           </Nav.Link>
         </Nav>
