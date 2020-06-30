@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./menu.css";
 import { BsFillBriefcaseFill } from "react-icons/bs";
+import { useSelector } from "react-redux";
 
 function Menu() {
+  const user = useSelector((state) => state.user);
+  const [hasUser, setHasUser] = useState(false);
+
+  useEffect(() => {
+    if (user && user.length > 0) {
+      setHasUser(true);
+    } else {
+      setHasUser(false);
+    }
+  }, [user]);
+
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Navbar.Brand href="#home">
@@ -34,7 +46,7 @@ function Menu() {
         <Nav>
           <Nav.Link>
             <Link className="menu" to="/login">
-              Login
+              {hasUser ? user + " - Sair" : "Login"}
             </Link>
           </Nav.Link>
         </Nav>
