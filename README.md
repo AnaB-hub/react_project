@@ -13,3 +13,4 @@ O frontend dessa aplicação se encontra no repositório `https://github.com/Ana
 * React Bootstrap
 * Redux
 * Redux-saga
+* Git Flow
