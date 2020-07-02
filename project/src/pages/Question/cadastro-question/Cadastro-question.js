@@ -7,7 +7,7 @@ import Alerta from "./../../../components/Alert/Alert";
 import Loader from "./../../../components/Loader/Loader";
 
 function CadastroQuestion() {
-  const [question, setQuestion] = useState("");
+  const [pergunta, setPergunta] = useState("");
   const [titulo, setTitulo] = useState("");
   const [categoria, setCategoria] = useState("");
   const [categorias, setCategorias] = useState([]);
@@ -29,7 +29,7 @@ function CadastroQuestion() {
   async function handleRegister(e) {
     e.preventDefault();
     const data = {
-      question,
+      pergunta,
       titulo,
       categoria,
     };
@@ -45,7 +45,7 @@ function CadastroQuestion() {
 
   function limpar() {
     setCategoria("");
-    setQuestion("");
+    setPergunta("");
   }
 
   return (
@@ -94,8 +94,8 @@ function CadastroQuestion() {
                 as="textarea"
                 rows="4"
                 placeholder="Informe a pergunta que deseja salvar"
-                value={question}
-                onChange={(e) => setQuestion(e.target.value)}
+                value={pergunta}
+                onChange={(e) => setPergunta(e.target.value)}
                 required
               />
             </Form.Group>

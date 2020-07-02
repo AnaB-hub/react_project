@@ -13,7 +13,7 @@ function ResponderQuestionario() {
   useEffect(() => {
     async function getQuestions() {
       setLoader(true);
-      let questions = await api.get("/question");
+      let questions = await api.get("/question/ativos");
       console.log(questions.data);
       setQuestions(questions.data);
       setLoader(false);
@@ -34,7 +34,7 @@ function ResponderQuestionario() {
               <Card.Title>
                 {question.id}- {question.titulo}
               </Card.Title>
-              <Card.Text>{question.question}</Card.Text>
+              <Card.Text>{question.pergunta}</Card.Text>
               <Card.Text>Categoria: {question.categoria}</Card.Text>
               <ButtonGroup>
                 <Button variant="primary" className="button">
