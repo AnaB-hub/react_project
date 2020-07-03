@@ -66,7 +66,7 @@ function CadastroQuestion() {
                 onChange={(e) => setCategoria(e.target.value)}
                 required
               >
-                <option value="null">Selecione</option>
+                <option value="">Selecione</option>
                 {categorias.map((categoria) => (
                   <option value={categoria.id}>{categoria.nome}</option>
                 ))}
